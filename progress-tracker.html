@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Learning Progress Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 26px;
+        }
+        .lesson {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .lesson span {
+            font-size: 18px;
+        }
+        .btn {
+            background: #ffcc00;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #e6b800;
+        }
+        .progress-bar {
+            width: 100%;
+            background: #ddd;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .progress {
+            height: 10px;
+            background: #ffcc00;
+            width: 0%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>AI Learning Progress Tracker</h1>
+        <p>Track your progress as you complete each lesson.</p>
+
+        <div class="lesson">
+            <span>📌 Introduction to AI</span>
+            <button class="btn" onclick="completeLesson(0)">Complete</button>
+        </div>
+        
+        <div class="lesson">
+            <span>📌 Machine Learning Basics</span>
+            <button class="btn" onclick="completeLesson(1)">Complete</button>
+        </div>
+        
+        <div class="lesson">
+            <span>📌 Deep Learning Overview</span>
+            <button class="btn" onclick="completeLesson(2)">Complete</button>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
+        <p id="progress-text">0% Completed</p>
+    </div>
+
+    <script>
+        // Load saved progress from local storage
+        let progressData = JSON.parse(localStorage.getItem("progress")) || [false, false, false];
+
+        function completeLesson(index) {
+            progressData[index] = true;
+            localStorage.setItem("progress", JSON.stringify(progressData));
+            updateProgress();
+        }
+
+        function updateProgress() {
+            let completed = progressData.filter(Boolean).length;
+            let total = progressData.length;
+            let percentage = (completed / total) * 100;
+            document.getElementById("progress").style.width = percentage + "%";
+            document.getElementById("progress-text").innerText = Math.round(percentage) + "% Completed";
+        }
+
+        // Initialize progress on load
+        updateProgress();
+    </script>
+</body>
+</html>

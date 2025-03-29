@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: white;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .navigation {
+            width: 260px;
+            background: rgba(30, 30, 30, 0.9);
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.6);
+        }
+        .navigation h2 {
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+        .navigation a {
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 8px 0;
+            transition: background 0.3s;
+        }
+        .navigation a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .main-content {
+            margin-left: 280px;
+            padding: 25px;
+            width: calc(100% - 260px);
+            overflow-y: auto;
+        }
+        h1 {
+            font-size: 42px;
+            animation: fadeIn 1s;
+        }
+        .info-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 18px;
+            margin: 18px 0;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .info-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+        }
+    </style>
+    <div class="main-content">
+        <h1>Welcome to AI Learning Portal</h1>
+        <p class="info-box">Revolutionizing Education with AI-Powered Personalized Learning.</p>
+
+        <div class="info-box">
+            <h2>Key Features</h2>
+            <ul>
+                
+                <li><strong>Adaptive Learning:</strong> AI customizes content for each student.</li>
+                <li><strong>AI Chatbot:</strong> Get real-time answers to queries.</li>
+                <li><strong>Gamified Learning:</strong> Unlock badges, complete challenges, and earn rewards.</li>
+                <li><strong>Personalized Study Plans:</strong> AI suggests study schedules tailored for you.</li>
+                <li><strong>Progress Tracker:</strong> Monitor improvement and set learning goals.</li>
+                <li><strong>Interactive Quizzes:</strong> Test knowledge with AI-driven quizzes.</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h2>How It Works</h2>
+            <ol>
+                <li><strong>Register:</strong> Create your learning profile.</li>
+                <li><strong>AI Assessment:</strong> AI evaluates your strengths and weaknesses.</li>
+                <li><strong>Customized Learning:</strong> AI recommends personalized lessons.</li>
+                <li><strong>Engage & Improve:</strong> Take quizzes, earn rewards, and track progress.</li>
+            </ol>
+        </div>
+
+        <div class="info-box">
+            <h2>Quiz Section</h2>
+            <p>Challenge yourself with AI-generated quizzes tailored to your learning level.</p>
+            <a href="quiz.html" style="color: #ffeb3b; font-weight: bold;">Start a Quiz</a>
+        </div>
+
+        <div class="info-box">
+            <h2>AI Chatbot</h2>
+            <p>Need help? Our AI chatbot is available 24/7 for instant assistance.</p>
+            <a href="ai-chatbot.html" style="color: #ffeb3b; font-weight: bold;">Chat with AI</a>
+        </div>
+
+        <div class="info-box">
+            <h2>Why Choose AI Learning?</h2>
+            <blockquote>“The AI tutor completely changed how I study!” - *Student A*</blockquote>
+            <blockquote>“This platform helps me track and improve my progress easily.” - *Student B*</blockquote>
+        </div>
+</body>
+</html>

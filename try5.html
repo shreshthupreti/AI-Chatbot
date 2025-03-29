@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Teacher</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <style>
+        /* body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        } */
+
+        body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #00c6ff, #0072ff); /* Beautiful gradient background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    animation: fadeIn 1s ease-in-out;
+}
+
+        .container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output-box {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .schema-image {
+            margin-top: 20px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Interactive Q&A with AI Tutor</h1>
+
+        <textarea id="input-message" placeholder="Enter your Question here..."></textarea>
+
+        <button id="convert-btn">Convert to SQL</button>
+
+        <div id="output" class="output-box">
+
+            <h2>Solution Of Your Question</h2>
+            <pre id="sql-command"></pre>
+        </div>
+        
+    </div>
+    <script type="module">
+        import { GoogleGenerativeAI } from "@google/generative-ai";
+
+        // Replace with your actual API Key
+        const API_KEY = 'AIzaSyClUvKgt-hqQbWS3o9McgYFRZrN4UBAkF8';
+
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+        document.getElementById('convert-btn').addEventListener('click', async function() {
+            const message = document.getElementById('input-message').value;
+            if (message.trim()) {
+                const roleDescription = `
+                You are an AI tutor that engages students through natural language conversations.
+                Your role is to ask probing questions and guide students to the solution, rather than providing direct answers.
+                For example:
+                - Input: "Why did my sorting algorithm time out on large inputs?"
+                - Output: "What differences do you notice between the test-case that passed and the one that timed out?"
+                - Input: "The input size is much larger in the one that timed out."
+                - Output: "How does the complexity of your algorithm handle larger inputs?"
+                `;
+                
+                try {
+                    const result = await model.generateContent(`${roleDescription}\n${message}`);
+                    const response = await result.response;
+                    const sqlCommand = await response.text();
+
+                    document.getElementById('sql-command').textContent = sqlCommand;
+
+                   
+                } catch (error) {
+                    console.error('Error:', error);
+                    document.getElementById('sql-command').textContent = 'An error occurred while generating the SQL command.';
+                }
+            } else {
+                alert('Please enter a query.');
+            }
+        });
+
+        
+    </script>
+</body>
+</html>

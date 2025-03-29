@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Learning Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@google/generative-ai"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background: linear-gradient(135deg, #1abc9c, #3498db);
+            color: white;
+        }
+        .sidebar {
+            width: 280px;
+            background: rgba(44, 62, 80, 0.9);
+            padding: 20px;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+        }
+        .sidebar h2 {
+            text-align: center;
+        }
+        .menu div {
+            padding: 15px;
+            margin: 10px 0;
+            background: #34495e;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .menu div:hover {
+            background: #2c3e50;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 40px;
+            background: white;
+            color: #2c3e50;
+            border-radius: 20px 0 0 20px;
+            overflow-y: auto;
+        }
+        .chart-container {
+            width: 80%;
+            margin: auto;
+        }
+        button {
+            padding: 12px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #f39c12;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #e67e22;
+        }
+        .listening {
+            font-size: 18px;
+            font-weight: bold;
+            color: red;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Dashboard</h2>
+        <div class="menu">
+            <div onclick="loadSection('learningPath')">Learning Path</div>
+            <div onclick="loadSection('aiTutor')">AI Tutor</div>
+            <div onclick="loadSection('analytics')">Analytics</div>
+            <div onclick="loadSection('voiceChat')">Voice Chat</div>
+        </div>
+    </div>
+    
+    <div class="content" id="mainContent">
+        <h2>Welcome to Your AI Learning Dashboard</h2>
+        <p>Select a section to get started.</p>
+    </div>
+
+    <script>
+        function loadSection(section) {
+            const mainContent = document.getElementById('mainContent');
+            if (section === 'learningPath') {
+                mainContent.innerHTML = '<h2>Personalized Learning Path</h2><p>Customized courses for you.</p>';
+            } else if (section === 'aiTutor') {
+                mainContent.innerHTML = '<h2>Ask AI Tutor</h2><div><textarea id="userQuery" placeholder="Ask anything..."></textarea><button onclick="askAI()">Ask AI</button><p id="aiResponse"></p></div>';
+            } else if (section === 'analytics') {
+                mainContent.innerHTML = '<h2>Learning Analytics</h2><div class="chart-container"><canvas id="progressChart"></canvas></div>';
+                renderChart();
+            } else if (section === 'voiceChat') {
+                mainContent.innerHTML = '<h2>AI Voice Chat</h2><button onclick="startVoiceChat()">Start Voice Chat</button><p id="listeningIndicator"></p><p id="voiceResponse"></p>';
+            }
+        }
+
+        function renderChart() {
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                    datasets: [{
+                        label: 'Completion Rate',
+                        data: [50, 75, 60, 90],
+                        backgroundColor: 'rgba(241, 196, 15, 0.7)',
+                        borderColor: 'rgba(241, 196, 15, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        }
+
+        async function askAI() {
+            const userInput = document.getElementById('userQuery').value;
+            const responseElement = document.getElementById('aiResponse');
+            responseElement.innerText = "Thinking...";
+            responseElement.innerText = "AI response goes here..."; // Replace with actual AI processing
+        }
+
+        function startVoiceChat() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            document.getElementById('listeningIndicator').innerText = "Listening...";
+            document.getElementById('listeningIndicator').classList.add('listening');
+            recognition.start();
+            
+            recognition.onresult = async function(event) {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('voiceResponse').innerText = "You said: " + transcript;
+                document.getElementById('listeningIndicator').innerText = "Processing...";
+                
+                document.getElementById('voiceResponse').innerText += "\nAI: " + "AI response goes here..."; // Replace with AI logic
+                document.getElementById('listeningIndicator').innerText = "";
+            };
+        }
+    </script>
+</body>
+</html>

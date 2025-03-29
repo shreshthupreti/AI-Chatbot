@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+            margin: 0;
+            padding: 0;
+            color: #34495e;
+            overflow-x: hidden;
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+            transition: width 0.3s;
+        }
+
+        .sidebar h2 {
+            color: #00838f;
+            font-family: 'Arial', sans-serif;
+            font-weight: 600;
+        }
+
+        .section {
+            margin: 10px 0;
+            padding: 15px;
+            background: linear-gradient(135deg, #4dd0e1, #26c6da);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s;
+            overflow-y: auto;
+            border-left: 1px solid #ccc;
+        }
+
+        .content h2 {
+            color: #00838f;
+            font-family: 'Arial', sans-serif;
+            font-weight: 600;
+            animation: fadeIn 0.5s ease-in-out;
+            margin-bottom: 10px;
+        }
+
+        .content-block {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .content-block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .description {
+            background: #f0f4c3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for the textarea and button */
+        textarea {
+            width: 90%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #b0bec5;
+            resize: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            color: #34495e;
+        }
+
+        textarea:focus {
+            border-color: #00838f;
+            outline: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            background-color: #00838f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 10px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #00695c;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .content {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Sections</h2>
+        <div class="section" onclick="showSection('learningPath')">Personalized Learning Path</div>
+        <div class="section" onclick="showSection('qa')">Interactive Q&A with AI Tutor</div>
+        <div class="section" onclick="showSection('analytics')">Learning Analytics</div>
+        <div class="section" onclick="showSection('library')">Content Library</div>
+    </div>
+
+    <div class="content" id="contentDisplay">
+        <h2>Welcome!</h2>
+        <p>To this revolutionary tool designed to enhance the way you learn and grow! This intelligent assistant tailors educational experiences to your unique needs, providing personalized guidance, interactive resources, and instant feedback. Whether you're tackling a new subject, honing a skill, or seeking motivation, our companion is here to support you every step of the way. With cutting-edge technology and a user-friendly interface, it's never been easier to unlock your full potential and make learning an engaging adventure.</p>
+    </div>
+
+    
+
+    <script>
+        function showSection(section) {
+            const contentDisplay = document.getElementById('contentDisplay');
+            let content = '';
+
+            switch (section) {
+                case 'learningPath':
+                    content = `
+                        <div class="content-block">
+                            <h2>Personalized Learning Path</h2>
+                            <div class="description">
+                                <p>Based on your progress and preferences.</p>
+                                <div class="path-card">
+                                    <h3>Mathematics</h3>
+                                    <p>Next Lesson: Algebra Basics</p>
+                                </div>
+                                <div class="path-card">
+                                    <h3>Science</h3>
+                                    <p>Next Lesson: Introduction to Physics</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'qa':
+                    content = `
+                        <div class="content-block">
+                            <h2>Interactive Q&A with AI Tutor</h2>
+                            <div class="description">
+                                <textarea placeholder="Ask your question here..."></textarea>
+                                <button>Ask AI</button>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'analytics':
+                    content = `
+                        <div class="content-block">
+                            <h2>Learning Analytics</h2>
+                            <div class="description">
+                                <p>Your performance metrics at a glance.</p>
+                                <h3>Overall Progress: 75%</h3>
+                                <div class="chart" style="width: 75%; background: #00838f; height: 10px; border-radius: 5px;"></div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'library':
+                    content = `
+                        <div class="content-block">
+                            <h2>Content Library</h2>
+                            <div class="description">
+                                <h3>Quick Quizes</h3>
+                                <p>Explore your knowledge understanding buy solving quizes.</p>
+                                <h3>Practice Problems</h3>
+                                <p>Engage with interactive practice problems to reinforce learning.</p>
+                                <h3>AI Generated Learning Summaries</h3>
+                                <p>Get concise summaries of your learning materials.</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                default:
+                    content = '<div class="content-block"><h2>Welcome!</h2><div class="description"><p>Select a section to view details.</p></div></div>';
+            }
+
+            contentDisplay.innerHTML = content;
+            contentDisplay.style.transform = 'translateX(0)';
+        }
+    </script>
+</body>
+</html>

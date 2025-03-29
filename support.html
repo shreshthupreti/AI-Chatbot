@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support | Help Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: #f4f4f4;
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .support-container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-section {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .faq-question {
+            background: #3498db;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #2980b9;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px;
+            background: #ecf0f1;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .contact-form {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #27ae60;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #219150;
+        }
+
+        .live-chat {
+            margin-top: 30px;
+            background: #e74c3c;
+            padding: 15px;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .live-chat:hover {
+            background: #c0392b;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            background: #34495e;
+        }
+
+        .back-button:hover {
+            background: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Support Center</h1>
+
+    <div class="support-container">
+
+        <h2>Frequently Asked Questions (FAQ)</h2>
+        <div class="faq-section">
+            <div class="faq-question" onclick="toggleAnswer(0)">❓ How do I register?</div>
+            <div class="faq-answer">You can register using your phone number and voice input.</div>
+
+            <div class="faq-question" onclick="toggleAnswer(1)">❓ How can I find a job?</div>
+            <div class="faq-answer">The AI automatically matches you with the best job based on your profile.</div>
+
+            <div class="faq-question" onclick="toggleAnswer(2)">❓ How do I contact an employer?</div>
+            <div class="faq-answer">Once you get a job match, the employer's contact details will be available.</div>
+        </div>
+
+        <h2>Contact Support</h2>
+        <div class="contact-form">
+            <input type="text" id="name" placeholder="Your Name">
+            <input type="email" id="email" placeholder="Your Email">
+            <textarea id="message" rows="4" placeholder="Describe your issue..."></textarea>
+            <button onclick="submitSupportRequest()">Submit</button>
+        </div>
+
+        <div class="live-chat" onclick="startLiveChat()">💬 Live Chat with Support</div>
+
+    </div>
+
+    <button class="back-button" onclick="goBack()">⬅ Back to Dashboard</button>
+
+    <script>
+        function toggleAnswer(index) {
+            let answers = document.querySelectorAll('.faq-answer');
+            answers[index].style.display = answers[index].style.display === 'block' ? 'none' : 'block';
+        }
+
+        function submitSupportRequest() {
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let message = document.getElementById('message').value;
+
+            if (name && email && message) {
+                alert("Support request submitted successfully!");
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('message').value = '';
+            } else {
+                alert("Please fill in all fields.");
+            }
+        }
+
+        function startLiveChat() {
+            alert("Connecting to a live agent...");
+        }
+
+        function goBack() {
+            window.location.href = "dashboard.html"; 
+        }
+    </script>
+
+</body>
+</html>
