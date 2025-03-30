@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tutor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=YOUR_RESPONSIVEVOICE_API_KEY"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+            margin-top: 20px;
+        }
+        .lesson-box, .chat-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .lesson-box button, #ask-btn, #voice-btn {
+            background: #ffcc00;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .lesson-box button:hover, #ask-btn:hover, #voice-btn:hover {
+            background: #e6b800;
+        }
+        #question {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        #response {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #fff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>AI Tutor</h1>
+    <p>Personalized AI-driven learning just for you!</p>
+
+    <div class="container">
+        <h2>Today's Recommended Lessons</h2>
+        <div class="lesson-box">
+            <h3>Introduction to DSA</h3>
+            <p>Learn the basics of Data Structures and Algorithms with real-world examples.</p>
+            <button onclick="checkLoginStatus('lesson-dsa.html')">Start Lesson</button>
+        </div>
+        <div class="lesson-box">
+            <h3>Sorting Algorithms</h3>
+            <p>Understand sorting techniques like Bubble Sort, Merge Sort, and Quick Sort.</p>
+            <button onclick="checkLoginStatus('lesson-sorting.html')">Start Lesson</button>
+        </div>
+        <div class="lesson-box">
+            <h3>Interactive Quiz</h3>
+            <p>Test your knowledge with a DSA-based quiz.</p>
+            <button onclick="checkLoginStatus('quiz.html')">Take Quiz</button>
+        </div>
+        <div class="lesson-box">
+            <h3>AI Chat Assistant</h3>
+            <p>Ask AI your doubts about DSA and problem-solving.</p>
+            <button onclick="checkLoginStatus('ai-chat.html')">Chat Now</button>
+        </div>
+    </div>
+
+    <div class="chat-box">
+        <h2>Ask AI Tutor</h2>
+        <input type="text" id="question" placeholder="Ask about DSA...">
+        <button id="ask-btn" onclick="getAIResponse()">Ask</button>
+        <button id="voice-btn" onclick="startVoiceRecognition()">🎤 Ask with Voice</button>
+        <p id="response"></p>
+    </div>
+
+    <script>
+        // Redirect to login if not logged in
+        function checkLoginStatus(nextPage) {
+            const loggedIn = localStorage.getItem("loggedIn");
+            if (!loggedIn) {
+                window.location.href = 'login.html';
+            } else {
+                window.location.href = nextPage;
+            }
+        }
+
+        // AI Response Function
+        async function getAIResponse() {
+            const question = document.getElementById('question').value;
+            if (!question) {
+                document.getElementById('response').innerText = "Please enter a question.";
+                return;
+            }
+            
+            document.getElementById('response').innerText = "Thinking...";
+            
+            try {
+                const response = await axios.post(
+                    'https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill',
+                    { inputs: question },
+                    {
+                        headers: {
+                            'Authorization': `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`,  
+                            'Content-Type': 'application/json'
+                        }
+                    }
+                );
+
+                const aiResponse = response.data.generated_text || "Sorry, I couldn't understand that.";
+                document.getElementById('response').innerText = aiResponse;
+                responsiveVoice.speak(aiResponse, "UK English Male");
+
+            } catch (error) {
+                console.error("Error fetching AI:", error);
+                document.getElementById('response').innerText = "Error fetching response. Please try again.";
+            }
+        }
+
+        // Voice Recognition Function
+        function startVoiceRecognition() {
+            if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+                alert("Sorry, your browser does not support voice recognition.");
+                return;
+            }
+
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                const userQuestion = event.results[0][0].transcript;
+                document.getElementById("question").value = userQuestion;
+                getAIResponse();
+            };
+
+            recognition.onerror = function(event) {
+                console.error("Voice recognition error:", event.error);
+                document.getElementById("response").innerText = "Voice recognition failed. Please try again.";
+            };
+        }
+    </script>
+</body>
+</html>
