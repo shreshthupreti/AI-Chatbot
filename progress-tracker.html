@@ -91,7 +91,7 @@
     </div>
 
     <script>
-        // Load saved progress from local storage
+        
         let progressData = JSON.parse(localStorage.getItem("progress")) || [false, false, false];
 
         function completeLesson(index) {
@@ -108,7 +108,7 @@
             document.getElementById("progress-text").innerText = Math.round(percentage) + "% Completed";
         }
 
-        // Initialize progress on load
+        
         updateProgress();
     </script>
 </body>
