@@ -131,7 +131,8 @@
             const userInput = document.getElementById('userQuery').value;
             const responseElement = document.getElementById('aiResponse');
             responseElement.innerText = "Thinking...";
-            responseElement.innerText = "AI response goes here..."; // Replace with actual AI processing
+            responseElement.innerText = "AI response goes here..."; 
+            
         }
 
         function startVoiceChat() {
@@ -146,7 +147,7 @@
                 document.getElementById('voiceResponse').innerText = "You said: " + transcript;
                 document.getElementById('listeningIndicator').innerText = "Processing...";
                 
-                document.getElementById('voiceResponse').innerText += "\nAI: " + "AI response goes here..."; // Replace with AI logic
+                document.getElementById('voiceResponse').innerText += "\nAI: " + "AI response goes here...";
                 document.getElementById('listeningIndicator').innerText = "";
             };
         }
