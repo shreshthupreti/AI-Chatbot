@@ -1,6 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #00c6ff, #0072ff); /* Beautiful gradient background */
+    background: linear-gradient(to right, #00c6ff, #0072ff); 
     margin: 0;
     padding: 0;
     display: flex;
@@ -17,11 +17,11 @@ body {
 }
 
 .login-container {
-    background: linear-gradient(to bottom right, #15d3b7, #0633c9); /* Gradient background for the login box */
+    background: linear-gradient(to bottom right, #15d3b7, #0633c9); 
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-    width: 400px; /* Width of the login box */
+    width: 400px; 
     text-align: center;
     position: relative;
     animation: slideIn 0.5s ease-in-out;
@@ -34,9 +34,9 @@ body {
 
 .login-container h2 {
     margin-bottom: 20px;
-    color: white; /* Change text color to white for better contrast */
-    font-weight: 700; /* Bold font */
-    font-size: 24px; /* Increased font size */
+    color: white; 
+    font-weight: 700;
+    font-size: 24px; 
     animation: popIn 0.5s ease-in-out;
 }
 
@@ -48,12 +48,12 @@ body {
 .login-container input[type="text"],
 .login-container input[type="password"] {
     width: 100%;
-    padding: 15px; /* Increased padding */
-    margin: 15px 0; /* Increased margin */
+    padding: 15px; 
+    margin: 15px 0; 
     border: 1px solid #ccc;
     border-radius: 5px;
     transition: border-color 0.3s;
-    font-size: 16px; /* Increased font size */
+    font-size: 16px; 
 }
 
 .login-container input[type="text"]:focus,
@@ -63,15 +63,15 @@ body {
 }
 
 .login-container button {
-    background-color: #4CAF50; /* Button color */
+    background-color: #4CAF50;
     color: white;
-    padding: 15px; /* Increased padding */
+    padding: 15px; 
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
     margin-top: 10px;
-    font-size: 18px; /* Increased font size */
+    font-size: 18px; 
     transition: background-color 0.3s, transform 0.3s;
 }
 
@@ -83,9 +83,9 @@ body {
 .login-container .create-account {
     margin-top: 20px;
     display: block;
-    color: white; /* Change text color to white */
+    color: white; 
     text-decoration: none;
-    font-size: 16px; /* Increased font size */
+    font-size: 16px; 
 }
 
 .login-container .create-account:hover {
@@ -98,7 +98,7 @@ body {
     font-size: 14px;
 }
 
-/* Loading spinner styles */
+
 .loading-spinner {
     display: none;
     position: absolute;
