@@ -100,7 +100,7 @@
     </div>
 
     <script>
-        // Redirect to login if not logged in
+        
         function checkLoginStatus(nextPage) {
             const loggedIn = localStorage.getItem("loggedIn");
             if (!loggedIn) {
@@ -110,7 +110,7 @@
             }
         }
 
-        // AI Response Function
+      
         async function getAIResponse() {
             const question = document.getElementById('question').value;
             if (!question) {
@@ -142,7 +142,7 @@
             }
         }
 
-        // Voice Recognition Function
+    
         function startVoiceRecognition() {
             if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
                 alert("Sorry, your browser does not support voice recognition.");
